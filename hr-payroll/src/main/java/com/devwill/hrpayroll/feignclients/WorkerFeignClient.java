@@ -12,7 +12,6 @@ import java.util.Optional;
 @Component
 @FeignClient(
         name = "hr-worker",
-        url = "localhost:8001",
         path = "/workers"
 )
 public interface WorkerFeignClient {
