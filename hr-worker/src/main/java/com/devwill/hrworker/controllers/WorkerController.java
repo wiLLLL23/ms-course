@@ -34,6 +34,12 @@ public class WorkerController {
     public ResponseEntity<Optional<Worker>> findById(
             @PathVariable final Long id)
     {
+//        try {
+//            Thread.sleep(3000L);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         final var worker = repository.findById(id);
         return ResponseEntity.ok(worker);
     }
