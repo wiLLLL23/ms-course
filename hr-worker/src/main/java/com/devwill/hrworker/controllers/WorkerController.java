@@ -2,6 +2,9 @@ package com.devwill.hrworker.controllers;
 
 import com.devwill.hrworker.entities.Worker;
 import com.devwill.hrworker.repositories.WorkerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +19,23 @@ import java.util.Optional;
 @RequestMapping(value = "/workers")
 public class WorkerController {
 
+    private static Logger log = LoggerFactory.getLogger(WorkerController.class);
+
+    @Value("${test.config}")
+    private String testConfig;
+
     private Environment env;
     private WorkerRepository repository;
 
     public WorkerController(WorkerRepository repository, Environment env) {
         this.repository = repository;
         this.env = env;
+    }
+
+    @GetMapping(value = "/configs")
+    public ResponseEntity<Void> getConfigs() {
+        log.info("CONFIG = {}", testConfig);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
